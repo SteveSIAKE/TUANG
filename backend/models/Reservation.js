@@ -10,9 +10,13 @@ const reservationSchema = new mongoose.Schema({
         ref: "Train",
         required: true,
     },
-    date_reservation: {
+    date_de_depart: {
         type: Date,
         required: true,
+    },
+    date_de_retour: {
+        type: Date,
+        required: false,
     },
     status: {
         type: String,
@@ -28,5 +32,9 @@ const reservationSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    passengers:{
+        type: Number,
+        required: true,
+    }
 }, { timestamps: true });
 module.exports = mongoose.model("Reservation", reservationSchema);
