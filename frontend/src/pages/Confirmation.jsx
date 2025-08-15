@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 function Confirmation() {
   const location = useLocation();
   const data = location.state;
+  console.log(data);
 
   return (
   <div className="py-16 px-4 text-center  text-gray-600 bg-gradient-to-r from-blue-50 to-blue-500 dark:from-gray-900 dark:to-blue-900">
