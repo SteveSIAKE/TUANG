@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isAuthenticated = !!localStorage.getItem("token");
 
   return (
     <header className="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-md">
@@ -28,14 +29,16 @@ export default function Header() {
             to="/login"
             className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-blue-900"
           >
-            Connexion
+            {!isAuthenticated ? "Connexion" : "Deconnexion"}
           </Link>
-          <Link
-            to="/register"
-            className=" bg-white px-4 py-2 border border-primary rounded-md text-sm font-medium  dark:text-blue-500  hover:text-blue-900"
-          >
-            Inscription
-          </Link>
+          {!isAuthenticated && (
+            <Link
+              to="/register"
+              className=" bg-white px-4 py-2 border border-primary rounded-md text-sm font-medium  dark:text-blue-500  hover:text-blue-900"
+            >
+              Inscription
+            </Link>
+          )}
         </div>
 
         {/* Mobile menu button */}

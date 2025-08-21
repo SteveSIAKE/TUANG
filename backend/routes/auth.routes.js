@@ -1,16 +1,55 @@
-const express = require('express');
+import express from "express";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import User from "../models/User.js";
+
 const router = express.Router();
-const authController = require('../controllers/auth.controller');
 
-//route pour la connexion
-router.post('/login', authController.login);
+// 📌 Inscription
+router.post("/register", async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
 
-// //route pour la déconnexion
-// router.post('/logout', authController.logout);
+    // Vérif des champs
+    if (!name || !email || !password) {
+      return res.status(400).json({ msg: "Tous les champs sont obligatoires" });
+    }
 
-//route pour la création d'un compte
-router.post('/register', authController.register);
+    // Vérif si l’email existe déjà
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ msg: "Cet email est déjà utilisé" });
+    }
 
-module.exports = router;
+    // Hash du mot de passe
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
+    // Création de l’utilisateur
+    const newUser = new User({
+      name,
+      email,
+      password: hashedPassword
+    });
 
+    await newUser.save();
+
+    // Génération du token JWT
+    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    res.json({
+      token,
+      user: {
+        id: newUser._id,
+        name: newUser.name,
+        email: newUser.email
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ msg: err.message });
+  }
+});
+
+export default router;

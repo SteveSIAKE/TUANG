@@ -1,7 +1,4 @@
-import React from 'react';
 import { Page, Text, View, Document } from '@react-pdf/renderer';
-
-
 export default function MyDocument() {
   return (
     <Document>

@@ -8,8 +8,7 @@ export default function RecherchezUnTrajet() {
 
   const today = new Date().toISOString().split("T")[0];
 
-  const [formData, setFormData] = useState(
-    existingData || {
+  const [formData, setFormData] = useState(existingData || {
       typeTrajet: "allerSimple",
       depart: "",
       destination: "",
@@ -76,7 +75,7 @@ export default function RecherchezUnTrajet() {
                   value="allerSimple"
                   checked={formData.typeTrajet === "allerSimple"}
                   onChange={handleChange}
-                  className="mr-2"
+                  className="mr-2 "
                 />
                 Aller simple
               </label>
@@ -87,7 +86,7 @@ export default function RecherchezUnTrajet() {
                   value="allerRetour"
                   checked={formData.typeTrajet === "allerRetour"}
                   onChange={handleChange}
-                  className="mr-2"
+                  className="mr-2 "
                 />
                 Aller-retour
               </label>
@@ -101,7 +100,7 @@ export default function RecherchezUnTrajet() {
               onChange={handleChange}
               className="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="">Sélectionnez une gare</option>
+              <option value="">Sélectionnez votre Classe </option>
               <option value="economique">Classe eonomique</option>
               <option value="premiere">Premiere Classe</option>
               <option value="premiere">Classe business</option>

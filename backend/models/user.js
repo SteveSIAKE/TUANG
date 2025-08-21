@@ -15,7 +15,8 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-    },
+        minlength: 6, // un minimum de sécurité
+      },
     role: {
         type: String,
         required: true,
@@ -34,10 +35,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    photo: {
-        type: String,
-        default: "https://via.placeholder.com/150",
-    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+      }
 }, { timestamps: true });
 
 userSchema.pre('save', async function(next) {
@@ -47,5 +48,5 @@ userSchema.pre('save', async function(next) {
 });
 
 const User = mongoose.model("User", userSchema);
-module.exports = User;
 
+export default User;

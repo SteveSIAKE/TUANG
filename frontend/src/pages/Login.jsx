@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase"; 
+
 function Login() {
   const navigate = useNavigate();
 
@@ -20,23 +23,20 @@ function Login() {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      // Authentification Firebase
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password
+      );
 
-      const data = await res.json();
+      const user = userCredential.user;
 
-      if (!res.ok) {
-        throw new Error(data.message || "Échec de la connexion");
-      }
-
-      // Stocker le token dans le localStorage
-      localStorage.setItem("token", data.token);
+      // Tu peux stocker l’UID ou le token Firebase
+      localStorage.setItem("uid", user.uid);
 
       alert("Connexion réussie !");
-      navigate("/"); // redirige vers la page d’accueil ou tableau de bord
+      navigate("/"); // redirection
     } catch (err) {
       setError(err.message);
     }
@@ -56,7 +56,7 @@ function Login() {
             placeholder="Email"
             onChange={handleChange}
             required
-            className="w-full border px-3 py-2 rounded"
+            className="w-full border px-3 py-2 rounded bg-white dark:bg-gray-800"
           />
           <input
             type="password"
@@ -64,7 +64,7 @@ function Login() {
             placeholder="Mot de passe"
             onChange={handleChange}
             required
-            className="w-full border px-3 py-2 rounded"
+            className="w-full border px-3 py-2 text-gray-600 rounded bg-white dark:bg-gray-800"
           />
           <button
             type="submit"
