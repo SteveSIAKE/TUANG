@@ -10,7 +10,7 @@ function Confirmation() {
 
   return (
   <div className="py-16 px-4 text-center  text-gray-600 bg-gradient-to-r from-blue-50 to-blue-500 dark:from-gray-900 dark:to-blue-900">
-    <div className="max-w-md mx-auto mt-8 p-6 bg-gradient-to-r border rounded-lg shadow-md">
+    <div className="max-w-md mx-auto mt-8 p-6 bg-gradient-to-r border rounded-lg shadow-md" data-aos="fade-up">
       <h1 className="text-3xl font-bold mb-4 text-gray-800 dark:text-white">
         Confirmation de Réservation
       </h1>

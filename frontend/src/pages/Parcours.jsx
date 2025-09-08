@@ -1,10 +1,4 @@
-import {
-  FaUserPlus,
-  FaSearch,
-  FaTicketAlt,
-  FaLock,
-  FaMobileAlt,
-} from "react-icons/fa";
+import {FaUserPlus,FaSearch,FaTicketAlt,FaLock,FaMobileAlt,} from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 function Parcours() {
@@ -52,7 +46,7 @@ function Parcours() {
           Réservez votre billet en quelques étapes simples et rapides.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8" data-aos="fade-up">
           {steps.map((step, index) => (
             <div
               key={index}

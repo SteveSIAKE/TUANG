@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase"; 
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function Register() {
   const navigate = useNavigate();
+  const { signup } = useAuth();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -12,10 +12,10 @@ function Register() {
     telephone: "",
     password: "",
     confirmPassword: "",
-    
   });
 
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,39 +25,37 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
 
     if (formData.password !== formData.confirmPassword) {
       setError("Les mots de passe ne correspondent pas !");
+      setLoading(false);
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setError("Le mot de passe doit contenir au moins 6 caractères !");
+      setLoading(false);
       return;
     }
 
     try {
-      // Création d'un utilisateur dans Firebase
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        formData.email,
-        formData.name,
-        formData.telephone,
-        formData.password
-   
-      );
-
-      const user = userCredential.user;
-      console.log("Utilisateur créé :", user);
-
-      // Stocker l'UID
-      localStorage.setItem("uid", user.uid);
-
-      alert("Inscription réussie !");
-      navigate("/login"); // après inscription, rediriger vers login
+      await signup(formData.email, formData.password, {
+        name: formData.name,
+        telephone: formData.telephone
+      });
+      
+      navigate("/dashboard");
     } catch (err) {
-      setError(err.message);
+      setError("Erreur lors de l'inscription. Vérifiez vos informations.");
+      console.error(err);
     }
+    setLoading(false);
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 to-blue-500 dark:from-gray-900 dark:to-blue-900">
-      <div className="max-w-md mx-auto mt-10 p-4 backdrop-blur-lg shadow-md rounded-lg border">
+      <div className="max-w-md mx-auto mt-10 p-4 backdrop-blur-lg shadow-md rounded-lg border" data-aos="fade-up">
         <h2 className="text-2xl font-bold mb-4 text-center text-gray-800 dark:text-white">
           Inscription
         </h2>
@@ -105,11 +103,18 @@ function Register() {
           />
           <button
             type="submit"
-            className="bg-blue-600 text-white px-4 py-2 rounded w-full hover:bg-blue-700 transition duration-200"
+            disabled={loading}
+            className="bg-blue-600 text-white px-4 py-2 rounded w-full hover:bg-blue-700 transition duration-200 disabled:opacity-50"
           >
-            S'inscrire
+            {loading ? "Inscription..." : "S'inscrire"}
           </button>
         </form>
+        <div className="text-center mt-4">
+          <p className="text-gray-600">Vous avez déjà un compte ?</p>
+          <Link to="/login" className="text-blue-600 hover:underline">
+            Se connecter
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -30,7 +30,7 @@ export default function Features() {
         <h2 className="text-3xl font-bold mb-12 text-gray-800 dark:text-white">
           Fonctionnalités clés
         </h2>
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4" data-aos="fade-up">
           {features.map((feature, index) => (
             <div key={index} className="flex flex-col items-center text-center">
               <div className="mb-4">{feature.icon}</div>

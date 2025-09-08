@@ -21,40 +21,40 @@ const ContactForm = () => {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700">Nom complet</label>
         <input
           type="text"
           name="name"
           id="name"
+          placeholder="Nom complet"
           value={formData.name}
           onChange={handleChange}
           required
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800"
         />
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
         <input
           type="email"
           name="email"
           id="email"
+          placeholder="Email"
           value={formData.email}
           onChange={handleChange}
           required
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800"
         />
       </div>
 
       <div>
-        <label htmlFor="subject" className="block text-sm font-medium text-gray-700">Sujet</label>
         <select
           name="subject"
           id="subject"
+          placeholder="Sujet"
           value={formData.subject}
           onChange={handleChange}
           required
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800"
         >
           <option value="">Sélectionnez un sujet</option>
           <option value="reservation">Problème de réservation</option>
@@ -64,23 +64,23 @@ const ContactForm = () => {
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
         <textarea
           name="message"
           id="message"
           rows="4"
+          placeholder="Message"
           value={formData.message}
           onChange={handleChange}
           required
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          className="w-full border px-3 py-2  rounded bg-white dark:bg-gray-800"
         ></textarea>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700">Joindre un fichier (optionnel)</label>
         <input
           type="file"
-          className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+          placeholder="Joindre un fichier (optionnel)"
+          className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-500 hover:file:bg-blue-100 dark:bg-gray-800"
         />
       </div>
 

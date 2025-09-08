@@ -9,10 +9,10 @@ export default function HeroSection() {
         <div className="md:w-1/2 text-center md:text-left  ">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             Réservez vos{" "}
-            <span className="text-blue-500"> billets de train </span> en toute
+            <span className="text-blue-500" data-aos="zoom-in"> billets de train </span> en toute
             simplicité
           </h1>
-          <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
+          <p className="text-lg text-gray-700 dark:text-gray-300 mb-6" >
             Gagnez du temps avec notre plateforme rapide, fiable et 100% en
             ligne !.
           </p>
@@ -33,7 +33,7 @@ export default function HeroSection() {
         </div>
 
         {/* Illustration ou image */}
-        <div className="md:w-1/2">
+        <div className="md:w-1/2" data-aos="flip-left">
           <img
             src={Illustration}
             alt="Illustration train"
